@@ -1,6 +1,8 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import llm
 import os
+import torch
+
 
 DEFAULT_SYSTEM_PROMPT = "You are OLMo 2, a helpful and harmless AI Assistant built by the Allen Institute for AI."
 

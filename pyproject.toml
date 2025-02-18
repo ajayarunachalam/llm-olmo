@@ -1,0 +1,32 @@
+[project]
+name = "llm-olmo"
+version = "0.1"
+description = "OLMo2 models plugin for LLM"
+readme = "README.md"
+authors = [{name = "Ajay Arunachalam"}]
+license = {text = "Apache-2.0"}
+classifiers = [
+    "License :: OSI Approved :: Apache Software License"
+]
+requires-python = ">=3.9"
+dependencies = [
+    "llm",
+    "transformers",
+    "torch"
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project.urls]
+Homepage = "https://github.com/ajayarunachalam/llm-olmo"
+Issues = "https://github.com/ajayarunachalam/llm-olmo/issues"
+
+[project.entry-points.llm]
+olmo = "llm_olmo"
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+

@@ -1,4 +1,4 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, TextStreamer
 import llm
 import os
 import torch
@@ -75,6 +75,9 @@ class OlmoBase(llm.Model):
                 inputs = {k: v.to('cuda') for k, v in inputs.items()}
                 model = model.to('cuda')
 
+            # Create proper streamer if streaming is enabled
+            streamer = TextStreamer(tokenizer) if stream else None
+
             # Generate response
             output_ids = model.generate(
                 **inputs,
@@ -84,7 +87,7 @@ class OlmoBase(llm.Model):
                 top_k=50,
                 top_p=0.95,
                 pad_token_id=tokenizer.eos_token_id,
-                streamer=stream,
+                streamer=streamer,
                 eos_token_id=tokenizer.encode("<|endoftext|>")[0]  # Set end token
             )
 

@@ -19,8 +19,10 @@ def register_commands(cli):
 
     @olmo_.command()
     def download_7b():
-        "Download the OLMo2 7B model"
-        AutoModelForCausalLM.from_pretrained("allenai/OLMo-2-1124-7B")
+        "Download quantized version of the OLMo2 7B model"
+        #AutoModelForCausalLM.from_pretrained("allenai/OLMo-2-1124-7B")
+        AutoModelForCausalLM.from_pretrained("allenai/OLMo-2-1124-7B", torch_dtype=torch.float16, load_in_8bit=True)  # requires bitsandbytes
+
         AutoTokenizer.from_pretrained("allenai/OLMo-2-1124-7B")
     
     # @olmo_.command()

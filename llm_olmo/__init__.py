@@ -9,7 +9,7 @@ DEFAULT_SYSTEM_PROMPT = "You are OLMo 2, a helpful and harmless AI Assistant bui
 @llm.hookimpl
 def register_models(register):
     register(Olmo7b(), aliases=("olmo7b",))
-    register(Olmo13b(), aliases=("olmo13b",))
+    #register(Olmo13b(), aliases=("olmo13b",))
 
 @llm.hookimpl
 def register_commands(cli):
@@ -23,11 +23,11 @@ def register_commands(cli):
         AutoModelForCausalLM.from_pretrained("allenai/OLMo-2-1124-7B")
         AutoTokenizer.from_pretrained("allenai/OLMo-2-1124-7B")
     
-    @olmo_.command()
-    def download_13b():
-        "Download the OLMo2 13B model"
-        AutoModelForCausalLM.from_pretrained("allenai/OLMo-2-1124-13B")
-        AutoTokenizer.from_pretrained("allenai/OLMo-2-1124-13B")
+    # @olmo_.command()
+    # def download_13b():
+    #     "Download the OLMo2 13B model"
+    #     AutoModelForCausalLM.from_pretrained("allenai/OLMo-2-1124-13B")
+    #     AutoTokenizer.from_pretrained("allenai/OLMo-2-1124-13B")
 
 class OlmoBase(llm.Model):
     def build_prompt(self, prompt, conversation):
@@ -113,9 +113,9 @@ class Olmo7b(OlmoBase):
     class Options(llm.Options):
         no_cuda: bool = False
 
-class Olmo13b(OlmoBase):
-    model_id = "olmo13b"
-    model_path = "allenai/OLMo-2-1124-13B"
+# class Olmo13b(OlmoBase):
+#     model_id = "olmo13b"
+#     model_path = "allenai/OLMo-2-1124-13B"
 
-    class Options(llm.Options):
-        no_cuda: bool = False
+#     class Options(llm.Options):
+#         no_cuda: bool = False

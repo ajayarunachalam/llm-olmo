@@ -38,7 +38,7 @@ def test_build_prompt_simple(model_name, prompt, expected):
     result = model.build_prompt(llm.Prompt(prompt, model), None)
     assert result == expected
 
-@pytest.mark.parametrize("model_name", ["olmo7b", "olmo13b"])
+@pytest.mark.parametrize("model_name", ["olmo7b"]) #, "olmo13b"
 def test_build_prompt_conversation(model_name):
     model = llm.get_model(model_name)
     conversation = model.conversation()
@@ -69,22 +69,22 @@ def test_download_commands():
     runner = CliRunner()
     result = runner.invoke(cli, ["olmo", "download_7b"])
     assert result.exit_code == 0
-    result = runner.invoke(cli, ["olmo", "download_13b"])
-    assert result.exit_code == 0
+    # result = runner.invoke(cli, ["olmo", "download_13b"])
+    # assert result.exit_code == 0
 
-@pytest.mark.parametrize("model_name", ["olmo7b", "olmo13b"])
+@pytest.mark.parametrize("model_name", ["olmo7b"]) #, "olmo13b"
 def test_model_options(model_name):
     model = llm.get_model(model_name)
     assert hasattr(model.Options, 'no_cuda')
     assert model.Options.no_cuda is False
 
-@pytest.mark.parametrize("model_name", ["olmo7b", "olmo13b"])
+@pytest.mark.parametrize("model_name", ["olmo7b"]) #, "olmo13b"
 def test_model_properties(model_name):
     model = llm.get_model(model_name)
     if model_name == "olmo7b":
         assert model.model_path == "allenai/OLMo-2-1124-7B"
-    else:
-        assert model.model_path == "allenai/OLMo-2-1124-13B"
+    # else:
+    #     assert model.model_path == "allenai/OLMo-2-1124-13B"
 
 def test_response_extraction():
     """Test that response extraction correctly handles the chat format"""
